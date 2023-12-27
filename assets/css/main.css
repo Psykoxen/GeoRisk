@@ -7,6 +7,19 @@ html {
   background-color: #f9faff;
   font-family: "Poppins", sans-serif;
 }
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f9faff;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
 @font-face {
   font-family: "Poppins";
   src: url("../fonts/poppins/Poppins-Regular.ttf") format("truetype");
