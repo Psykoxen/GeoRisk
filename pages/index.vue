@@ -1,14 +1,31 @@
-<script setup>
-window.addEventListener("scroll", function () {
-  let value = window.scrollY;
+<script>
+export default {
+  methods: {
+    async requestDanger() {
+      try {
+        const response = await $fetch("/api/risk", {
+          method: "post",
+          body: { adress: document.getElementById("adress").value },
+        });
+        console.log(response);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", function () {
+      let value = window.scrollY;
 
-  title.style.marginTop = value * 1.8 + "px";
-  layer6.style.top = value * 1.5 + "px";
-  layer5.style.top = value * 1.3 + "px";
-  layer4.style.top = value * 1.0 + "px";
-  layer3.style.top = value * 0.8 + "px";
-  layer2.style.top = value * 0.6 + "px";
-});
+      title.style.marginTop = value * 1.8 + "px";
+      layer6.style.top = value * 1.5 + "px";
+      layer5.style.top = value * 1.3 + "px";
+      layer4.style.top = value * 1.0 + "px";
+      layer3.style.top = value * 0.8 + "px";
+      layer2.style.top = value * 0.6 + "px";
+    });
+  },
+};
 </script>
 
 <template>
@@ -22,7 +39,14 @@ window.addEventListener("scroll", function () {
       <img src="../assets/img/layer2.png" alt="layer2" id="layer2" />
       <img src="../assets/img/layer1.png" alt="layer1" id="layer1" />
     </section>
-    <section class="sec">
+    <section class="sec relative flex flex-col w-full items-center">
+      <input
+        class="bg-white rounded-lg shadow-lg text-black p-4 mb-4 border-solid border-2 border-light-gray-main-100 w-3/4"
+        type="text"
+        id="adress"
+        placeholder="Adresse, Commune, Lieu-dit"
+        @change="requestDanger()"
+      />
       <h2>Section 2</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vitae
