@@ -1,5 +1,24 @@
 <script>
 export default {
+  data() {
+    return {
+      response: null,
+      flooding: 0,
+      groundMovements: 0,
+      earthquakes: 0,
+      avalanches: 0,
+      volcanicEruptions: 0,
+      forestFires: 0,
+      weatherTroubles: 0,
+      radon: 0,
+      industrialRisks: 0,
+      nuclearRisks: 0,
+      damBreaks: 0,
+      dangerTransport: 0,
+      warEngines: 0,
+      miningRisks: 0,
+    };
+  },
   methods: {
     async requestDanger() {
       try {
@@ -7,6 +26,74 @@ export default {
           method: "post",
           body: { adress: document.getElementById("adress").value },
         });
+        this.$data.response = response;
+        for (let i = 0; i < response.risques.length; i++) {
+          switch (parseInt(response.risques[i].num_risque)) {
+            case 140:
+            case 180:
+            case 183:
+            case 130:
+            case 286:
+              this.$data.flooding++;
+              break;
+            case 134:
+            case 135:
+            case 143:
+            case 147:
+            case 153:
+            case 157:
+              this.$data.groundMovements++;
+              break;
+            case 158:
+              this.$data.earthquakes++;
+              break;
+            case 159:
+              this.$data.avalanches++;
+              break;
+            case 160:
+              this.$data.volcanicEruptions++;
+              break;
+            case 166:
+              this.$data.forestFires++;
+              break;
+            case 167:
+            case 168:
+            case 169:
+            case 175:
+            case 176:
+            case 177:
+              this.$data.weatherTroubles++;
+              break;
+            case 229:
+              this.$data.radon++;
+              break;
+            case 215:
+            case 236:
+            case 237:
+            case 238:
+              this.$data.industrialRisks++;
+              break;
+            case 230:
+              this.$data.nuclearRisks++;
+              break;
+            case 213:
+              this.$data.damBreaks++;
+              break;
+            case 226:
+              this.$data.dangerTransport++;
+              break;
+            case 231:
+              this.$data.warEngines++;
+              break;
+            case 256:
+            case 254:
+            case 293:
+            case 288:
+            case 259:
+              this.$data.miningRisks++;
+              break;
+          }
+        }
         console.log(response);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -39,7 +126,7 @@ export default {
       <img src="../assets/img/layer2.png" alt="layer2" id="layer2" />
       <img src="../assets/img/layer1.png" alt="layer1" id="layer1" />
     </section>
-    <section class="sec relative flex flex-col w-full items-center">
+    <section class="sec relative flex flex-col w-full items-center pb-20">
       <input
         class="bg-white rounded-lg shadow-lg text-black p-4 mb-4 border-solid border-2 border-light-gray-main-100 w-3/4"
         type="text"
@@ -47,58 +134,32 @@ export default {
         placeholder="Adresse, Commune, Lieu-dit"
         @change="requestDanger()"
       />
-      <h2>Section 2</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vitae
-        est nisi. Curabitur interdum lacinia lacus eget mollis. Morbi iaculis,
-        turpis quis ultricies viverra, erat justo ornare lectus, vitae aliquet
-        lorem mi id sem. Nunc interdum justo et consequat tempor. Integer mattis
-        orci est, vitae imperdiet magna mollis quis. Nam non est condimentum
-        velit sodales accumsan. Ut mollis mauris molestie, interdum ex ultrices,
-        feugiat purus. Mauris non porta ante. Pellentesque vitae interdum neque,
-        quis pretium urna.
-        <br /><br />
-        Praesent elementum nibh et erat pharetra ullamcorper. Quisque laoreet
-        dui eget porttitor mattis. Nulla facilisi. Cras pharetra, turpis et
-        lacinia convallis, enim nisl tincidunt risus, eu aliquam odio leo ac
-        nibh. Curabitur malesuada ipsum non blandit cursus. Morbi nec aliquet
-        est. Etiam non sapien sit amet est sodales pulvinar sit amet nec augue.
-        Mauris eget ipsum libero. Praesent cursus id nulla a sollicitudin.
-        Curabitur egestas, mi et mattis elementum, eros justo gravida ex, ac
-        hendrerit lorem diam a nulla. Vivamus sit amet mollis felis. Suspendisse
-        hendrerit arcu at mauris rhoncus, in accumsan risus ullamcorper. Nullam
-        id erat in elit convallis tincidunt ac in eros. Mauris blandit porta
-        ante, non tincidunt sapien mattis eget.
-        <br /><br />
-        Aliquam vestibulum, nulla id tempus facilisis, velit lectus fringilla
-        sem, in fringilla nunc tortor eu nunc. In pharetra venenatis eros et
-        tempus. Sed pellentesque lorem sodales nibh porttitor interdum. Sed vel
-        ex commodo, varius sem sit amet, pharetra magna. Fusce orci quam, mollis
-        et nisl sit amet, volutpat finibus tortor. Cras tincidunt, orci non
-        iaculis rutrum, turpis ante rhoncus ex, non consectetur sapien purus at
-        velit. Fusce lacinia enim justo, sit amet lacinia orci pretium vitae.
-        Nullam pharetra scelerisque ornare.
-        <br /><br />
-        Integer eu pellentesque dui. Ut non lacus non arcu dapibus fermentum id
-        ut velit. Sed justo sem, imperdiet nec lacinia quis, imperdiet eget
-        magna. Pellentesque egestas, erat ac rutrum posuere, sem neque porttitor
-        ex, id ultrices erat tellus vitae turpis. Lorem ipsum dolor sit amet,
-        consectetur adipiscing elit. Maecenas sapien augue, finibus id nisl id,
-        pellentesque interdum ante. Cras et iaculis nulla. Sed ultrices aliquam
-        elementum. Sed viverra pellentesque enim, ut aliquam purus efficitur a.
-        Integer accumsan tincidunt ex hendrerit molestie.
-        <br /><br />
-        Mauris a dignissim augue. Fusce nibh ligula, pulvinar vel vehicula id,
-        mattis sed nibh. Integer a malesuada enim, sit amet laoreet nulla.
-        Mauris tempor at quam sit amet egestas. Maecenas pretium sapien rhoncus
-        erat auctor luctus. Sed auctor diam non sapien porta pretium. Sed
-        ultricies nibh vitae urna eleifend, at malesuada metus euismod. Fusce at
-        nulla commodo, accumsan enim ac, venenatis augue. Curabitur a orci sit
-        amet risus ultricies scelerisque. Etiam dui erat, fringilla ut leo vel,
-        malesuada tristique nisi. Mauris ut sapien maximus, congue leo sit amet,
-        vehicula dolor. Nam rutrum molestie lobortis. Nunc placerat imperdiet
-        augue, eget efficitur purus tincidunt at.
-      </p>
+
+      <div
+        v-if="this.$data.response !== null"
+        class="grid grid-cols-4 gap-4 pt-10"
+      >
+        <RisksAvalanche class="col-span-1" :level="avalanches" />
+        <div
+          class="col-span-2 flex flex-col items-center justify-center h-full"
+        >
+          <h2 class="text-center">{{ response?.city }}</h2>
+        </div>
+        <RisksFlooding class="col-span-1" :level="flooding" />
+        <RisksGroundMovements class="col-span-1" :level="groundMovements" />
+        <RisksEarthquakes class="col-span-1" :level="earthquakes" />
+        <RisksAvalanche class="col-span-1" :level="avalanches" />
+        <RisksVolcanicEruptions class="col-span-1" :level="volcanicEruptions" />
+        <RisksForestFires class="col-span-1" :level="forestFires" />
+        <RisksWeatherTroubles class="col-span-1" :level="weatherTroubles" />
+        <RisksRadon class="col-span-1" :level="radon" />
+        <RisksIndustrial class="col-span-1" :level="industrialRisks" />
+        <RisksNuclear class="col-span-1" :level="nuclearRisks" />
+        <RisksDamBreaks class="col-span-1" :level="damBreaks" />
+        <RisksDangerTransport class="col-span-1" :level="dangerTransport" />
+        <RisksWarEngine class="col-span-1" :level="warEngines" />
+        <RisksMining class="col-span-1" :level="miningRisks" />
+      </div>
     </section>
   </section>
 </template>
@@ -112,6 +173,7 @@ export default {
   height: 100vh;
   background-color: #f4ffee;
   overflow: hidden;
+  min-width: 100vw;
 }
 
 .parallax img {
@@ -121,6 +183,7 @@ export default {
   height: 100vh;
   pointer-events: none;
   object-fit: cover;
+  min-width: 100vw;
 }
 
 .sec {
