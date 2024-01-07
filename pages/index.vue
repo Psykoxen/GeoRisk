@@ -121,31 +121,40 @@ export default {
       <img src="../assets/img/layer6.png" alt="layer6" id="layer6" />
       <img src="../assets/img/layer5.png" alt="layer5" id="layer5" />
       <img src="../assets/img/layer4.png" alt="layer4" id="layer4" />
-      <h2 id="title">GeoRisk</h2>
+      <h2 id="title" class="text-8xl">GeoRisk</h2>
       <img src="../assets/img/layer3.png" alt="layer3" id="layer3" />
       <img src="../assets/img/layer2.png" alt="layer2" id="layer2" />
       <img src="../assets/img/layer1.png" alt="layer1" id="layer1" />
     </section>
-    <section class="sec relative flex flex-col w-full items-center pb-20">
-      <input
-        class="bg-white rounded-lg shadow-lg text-black p-4 mb-4 border-solid border-2 border-light-gray-main-100 w-3/4"
-        type="text"
-        id="adress"
-        placeholder="Adresse, Commune, Lieu-dit"
-        @change="requestDanger()"
-      />
+    <section
+      class="sec relative flex flex-col w-full items-center justify-center pb-20"
+    >
+      <div class="flex flex-row w-3/4 md:w-2/3 rounded-lg shadow-lg">
+        <input
+          class="bg-white text-black p-4 mb-4 border-solid border-2 rounded-l-full border-light-gray-main-100 md:w-3/4 2/3"
+          type="text"
+          id="adress"
+          placeholder="Adresse, Commune, Lieu-dit"
+          @change="requestDanger()"
+        />
+        <button
+          class="bg-green-main-600 text-white p-4 mb-4 md:w-1/4 1/3 rounded-r-full outline-none focus:outline-none"
+          @click="requestDanger()"
+        >
+          Rechercher
+        </button>
+      </div>
 
       <div
         v-if="this.$data.response !== null"
-        class="grid grid-cols-4 gap-4 pt-10"
+        class="flex flex-col items-center md:grid grid-cols-4 gap-4 w-full lg:w-2/3 md:3/4 p-10"
       >
-        <RisksAvalanche class="col-span-1" :level="avalanches" />
-        <div
-          class="col-span-2 flex flex-col items-center justify-center h-full"
-        >
-          <h2 class="text-center">{{ response?.city }}</h2>
-        </div>
         <RisksFlooding class="col-span-1" :level="flooding" />
+        <div
+          class="col-span-2 hidden md:flex flex-col items-center justify-center h-full"
+        >
+          <h2 class="text-center font-semibold">{{ response?.city }}</h2>
+        </div>
         <RisksGroundMovements class="col-span-1" :level="groundMovements" />
         <RisksEarthquakes class="col-span-1" :level="earthquakes" />
         <RisksAvalanche class="col-span-1" :level="avalanches" />
@@ -198,7 +207,6 @@ export default {
 
 #title {
   position: absolute;
-  font-size: 7em;
   font-weight: bold;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white risk">
+  <div class="bg-white risk w-full">
     <img
       src="../../assets/svg/risksIcons/WarEngine.svg"
       alt="Avalanche"
@@ -14,7 +14,6 @@
 
 <style scoped>
 .risk {
-  width: 20vw;
   position: relative; /* Ajout de la propriété position relative */
   border-radius: 10px;
   padding: 3vw 1vw 1vw 1vw;
