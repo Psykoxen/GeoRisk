@@ -129,7 +129,7 @@ export default {
     <section
       class="sec relative flex flex-col w-full items-center justify-center pb-20"
     >
-      <div class="flex flex-row w-3/4 md:w-2/3 rounded-lg shadow-lg">
+      <div class="flex flex-row md:w-2/3 rounded-lg shadow-lg">
         <input
           class="bg-white text-black p-4 mb-4 border-solid border-2 rounded-l-full border-light-gray-main-100 md:w-3/4 2/3"
           type="text"
