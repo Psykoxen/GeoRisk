@@ -71,13 +71,18 @@ Mining activities entail various hazards that can impact the environment, worker
 
 ## Roadmap 🎯
 
-- ⏳ Parallax Background
-- ⏳ API Requesting
+- ✅ Parallax Background
+- ✅ API Requesting
   - ✅ API Localisation
-  - ⏳ API Georisque
-  - ⏳ APIs convergence in own nuxt integrated API
+  - ✅ API Georisque
+  - ✅ APIs convergence in own nuxt integrated API
 - ⏳ API Interpretation
-- ⏳ Custom data display
+  - ✅ API Risk display
+  - ⏳ API Risk history
+- ⏳ AI Assistant
+  - ⏳ Open AI Integration
+  - ⏳ Assistant design
+- ⏳ Responsive Design
 
 ## How to Contribute 🤝
 
