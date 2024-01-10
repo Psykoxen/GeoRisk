@@ -13,7 +13,7 @@
 
 ## About the Project
 
-Georisk is a webapp based on [Georisque Government API](https://api.gouv.fr/les-api/api-georisques) to display risks for a selected location. The mission is to democratize risk analysis . The objective is to create a user-friendly and inclusive platform, allowing everyone to visualize and stay informed about constant risk evoltion in area.
+Georisk is a webapp based on [French Georisque Government API](https://api.gouv.fr/les-api/api-georisques) to display risks for a selected location in France. The mission is to democratize risk analysis . The objective is to create a user-friendly and inclusive platform, allowing everyone to visualize and stay informed about constant risk evoltion in area.
 
 ## Risks Analysed
 
