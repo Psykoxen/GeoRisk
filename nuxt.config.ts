@@ -2,6 +2,9 @@
 import path from "path";
 
 export default defineNuxtConfig({
+  colorMode: {
+    preference: "dark",
+  },
   app: {
     pageTransition: { name: "page", mode: "out-in" },
   },

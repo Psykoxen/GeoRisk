@@ -32,13 +32,13 @@ export default {
         });
         return;
       } else {
+        this.setDefaultValue();
         try {
           const response = await $fetch("/api/risk", {
             method: "post",
             body: { adress: document.getElementById("adress").value },
           });
           this.$data.response = response;
-          this.setDefaultValue();
           for (let i = 0; i < response.risques.length; i++) {
             switch (parseInt(response.risques[i].num_risque)) {
               case 140:
@@ -119,6 +119,7 @@ export default {
       }
     },
     setDefaultValue() {
+      this.$data.response = null;
       this.$data.flooding = 0;
       this.$data.groundMovements = 0;
       this.$data.earthquakes = 0;
