@@ -1,4 +1,5 @@
 <script>
+const toast = useToast();
 export default {
   data() {
     return {
@@ -21,82 +22,99 @@ export default {
   },
   methods: {
     async requestDanger() {
-      try {
-        const response = await $fetch("/api/risk", {
-          method: "post",
-          body: { adress: document.getElementById("adress").value },
+      if (document.getElementById("adress").value === "") {
+        console.log("empty");
+        toast.add({
+          title: "Recherche Invalide",
+          description: "Veuillez entrer une adresse valide",
+          icon: "i-heroicons-x-circle",
+          color: "red",
         });
-        this.$data.response = response;
-        for (let i = 0; i < response.risques.length; i++) {
-          switch (parseInt(response.risques[i].num_risque)) {
-            case 140:
-            case 180:
-            case 183:
-            case 130:
-            case 286:
-              this.$data.flooding++;
-              break;
-            case 134:
-            case 135:
-            case 143:
-            case 147:
-            case 153:
-            case 157:
-              this.$data.groundMovements++;
-              break;
-            case 158:
-              this.$data.earthquakes++;
-              break;
-            case 159:
-              this.$data.avalanches++;
-              break;
-            case 160:
-              this.$data.volcanicEruptions++;
-              break;
-            case 166:
-              this.$data.forestFires++;
-              break;
-            case 167:
-            case 168:
-            case 169:
-            case 175:
-            case 176:
-            case 177:
-              this.$data.weatherTroubles++;
-              break;
-            case 229:
-              this.$data.radon++;
-              break;
-            case 215:
-            case 236:
-            case 237:
-            case 238:
-              this.$data.industrialRisks++;
-              break;
-            case 230:
-              this.$data.nuclearRisks++;
-              break;
-            case 213:
-              this.$data.damBreaks++;
-              break;
-            case 226:
-              this.$data.dangerTransport++;
-              break;
-            case 231:
-              this.$data.warEngines++;
-              break;
-            case 256:
-            case 254:
-            case 293:
-            case 288:
-            case 259:
-              this.$data.miningRisks++;
-              break;
+        return;
+      } else {
+        try {
+          const response = await $fetch("/api/risk", {
+            method: "post",
+            body: { adress: document.getElementById("adress").value },
+          });
+          this.$data.response = response;
+          for (let i = 0; i < response.risques.length; i++) {
+            switch (parseInt(response.risques[i].num_risque)) {
+              case 140:
+              case 180:
+              case 183:
+              case 130:
+              case 286:
+                this.$data.flooding++;
+                break;
+              case 134:
+              case 135:
+              case 143:
+              case 147:
+              case 153:
+              case 157:
+                this.$data.groundMovements++;
+                break;
+              case 158:
+                this.$data.earthquakes++;
+                break;
+              case 159:
+                this.$data.avalanches++;
+                break;
+              case 160:
+                this.$data.volcanicEruptions++;
+                break;
+              case 166:
+                this.$data.forestFires++;
+                break;
+              case 167:
+              case 168:
+              case 169:
+              case 175:
+              case 176:
+              case 177:
+                this.$data.weatherTroubles++;
+                break;
+              case 229:
+                this.$data.radon++;
+                break;
+              case 215:
+              case 236:
+              case 237:
+              case 238:
+                this.$data.industrialRisks++;
+                break;
+              case 230:
+                this.$data.nuclearRisks++;
+                break;
+              case 213:
+                this.$data.damBreaks++;
+                break;
+              case 226:
+                this.$data.dangerTransport++;
+                break;
+              case 231:
+                this.$data.warEngines++;
+                break;
+              case 256:
+              case 254:
+              case 293:
+              case 288:
+              case 259:
+                this.$data.miningRisks++;
+                break;
+            }
           }
+          console.log(response);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          toast.add({
+            title: "Erreur",
+            description: "Oups, une erreur est survenue",
+            icon: "i-heroicons-question-mark-circle",
+            color: "amber",
+          });
         }
-        console.log(response);
-      } catch (error) {
-        console.error("Error fetching data:", error);
       }
     },
   },
@@ -144,7 +162,6 @@ export default {
           Rechercher
         </button>
       </div>
-
       <div
         v-if="this.$data.response !== null"
         class="flex flex-col items-center md:grid grid-cols-4 gap-4 w-full lg:w-2/3 md:3/4 p-10"
