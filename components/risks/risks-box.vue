@@ -14,7 +14,7 @@
     />
     <img
       v-if="title === 'Seisme'"
-      src="../../assets/svg/risksIcons/Earthquakes.svg"
+      src="../../assets/svg/risksIcons/EarthQuakes.svg"
       alt="Earthquakes"
       class="icon"
     />
@@ -55,7 +55,7 @@
       class="icon"
     />
     <img
-      v-if="title === 'Transport de matières dangereuses'"
+      v-if="title === 'Transport Dangereux'"
       src="../../assets/svg/risksIcons/DangerTransport.svg"
       alt="DangerousMaterialsTransport"
       class="icon"
@@ -103,7 +103,7 @@
           <h3
             class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
           >
-            Flooding Risk
+            Risque {{ title }}
           </h3>
           <UButton
             color="gray"
@@ -114,8 +114,10 @@
           />
         </div>
       </template>
+      <div>Definition du risque</div>
+      <UDivider />
       <div class="flex flex-col items-center">
-        <p>{{ this.$data.response.catnat }}</p>
+        <UAccordion :items="history" />
       </div>
     </UCard>
   </UModal> -->
@@ -155,6 +157,10 @@ export default {
     },
     title: {
       type: String,
+      required: true,
+    },
+    history: {
+      type: Array,
       required: true,
     },
   },

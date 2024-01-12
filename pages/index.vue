@@ -183,7 +183,12 @@ export default {
         v-if="this.$data.response !== null"
         class="flex flex-col items-center md:grid grid-cols-4 gap-4 w-full lg:w-2/3 md:3/4 p-10"
       >
-        <RisksBox class="col-span-1" :level="flooding" :title="'Inondation'" />
+        <RisksBox
+          class="col-span-1"
+          :level="flooding"
+          :title="'Inondation'"
+          :history="response?.catnat"
+        />
         <div
           class="col-span-2 hidden md:flex flex-col items-center justify-center h-full"
         >
@@ -230,7 +235,7 @@ export default {
         <RisksBox
           class="col-span-1"
           :level="dangerTransport"
-          :title="'Transport de matières dangereuses'"
+          :title="'Transport Dangereux'"
         />
         <RisksBox
           class="col-span-1"
