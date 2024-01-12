@@ -38,6 +38,7 @@ export default {
             body: { adress: document.getElementById("adress").value },
           });
           this.$data.response = response;
+          this.setDefaultValue();
           for (let i = 0; i < response.risques.length; i++) {
             switch (parseInt(response.risques[i].num_risque)) {
               case 140:
@@ -117,6 +118,22 @@ export default {
         }
       }
     },
+    setDefaultValue() {
+      this.$data.flooding = 0;
+      this.$data.groundMovements = 0;
+      this.$data.earthquakes = 0;
+      this.$data.avalanches = 0;
+      this.$data.volcanicEruptions = 0;
+      this.$data.forestFires = 0;
+      this.$data.weatherTroubles = 0;
+      this.$data.radon = 0;
+      this.$data.industrialRisks = 0;
+      this.$data.nuclearRisks = 0;
+      this.$data.damBreaks = 0;
+      this.$data.dangerTransport = 0;
+      this.$data.warEngines = 0;
+      this.$data.miningRisks = 0;
+    },
   },
   mounted() {
     window.addEventListener("scroll", function () {
@@ -166,25 +183,61 @@ export default {
         v-if="this.$data.response !== null"
         class="flex flex-col items-center md:grid grid-cols-4 gap-4 w-full lg:w-2/3 md:3/4 p-10"
       >
-        <RisksFlooding class="col-span-1" :level="flooding" />
+        <RisksBox class="col-span-1" :level="flooding" :title="'Inondation'" />
         <div
           class="col-span-2 hidden md:flex flex-col items-center justify-center h-full"
         >
           <h2 class="text-center font-semibold">{{ response?.city }}</h2>
         </div>
-        <RisksGroundMovements class="col-span-1" :level="groundMovements" />
-        <RisksEarthquakes class="col-span-1" :level="earthquakes" />
-        <RisksAvalanche class="col-span-1" :level="avalanches" />
-        <RisksVolcanicEruptions class="col-span-1" :level="volcanicEruptions" />
-        <RisksForestFires class="col-span-1" :level="forestFires" />
-        <RisksWeatherTroubles class="col-span-1" :level="weatherTroubles" />
-        <RisksRadon class="col-span-1" :level="radon" />
-        <RisksIndustrial class="col-span-1" :level="industrialRisks" />
-        <RisksNuclear class="col-span-1" :level="nuclearRisks" />
-        <RisksDamBreaks class="col-span-1" :level="damBreaks" />
-        <RisksDangerTransport class="col-span-1" :level="dangerTransport" />
-        <RisksWarEngine class="col-span-1" :level="warEngines" />
-        <RisksMining class="col-span-1" :level="miningRisks" />
+        <RisksBox
+          class="col-span-1"
+          :level="groundMovements"
+          :title="'Glissement de terrain'"
+        />
+        <RisksBox class="col-span-1" :level="earthquakes" :title="'Seisme'" />
+        <RisksBox class="col-span-1" :level="avalanches" :title="'Avalanche'" />
+        <RisksBox
+          class="col-span-1"
+          :level="volcanicEruptions"
+          :title="'Volcaniques'"
+        />
+        <RisksBox
+          class="col-span-1"
+          :level="forestFires"
+          :title="'Feu de Forêt'"
+        />
+        <RisksBox
+          class="col-span-1"
+          :level="weatherTroubles"
+          :title="'Météorologiques'"
+        />
+        <RisksBox class="col-span-1" :level="radon" :title="'Radon'" />
+        <RisksBox
+          class="col-span-1"
+          :level="industrialRisks"
+          :title="'Industriels'"
+        />
+        <RisksBox
+          class="col-span-1"
+          :level="nuclearRisks"
+          :title="'Nucléaires'"
+        />
+        <RisksBox
+          class="col-span-1"
+          :level="damBreaks"
+          :title="'Rupture de Barrages'"
+        />
+        <RisksBox
+          class="col-span-1"
+          :level="dangerTransport"
+          :title="'Transport de matières dangereuses'"
+        />
+        <RisksBox
+          class="col-span-1"
+          :level="warEngines"
+          :title="'Engins de guerre'"
+        />
+        <RisksBox class="col-span-1" :level="miningRisks" :title="'Miniers'" />
       </div>
     </section>
   </section>
