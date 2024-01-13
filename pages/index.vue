@@ -18,6 +18,7 @@ export default {
       dangerTransport: 0,
       warEngines: 0,
       miningRisks: 0,
+      isOpen: false,
     };
   },
   methods: {
@@ -191,9 +192,20 @@ export default {
           :history="response?.catnat"
         />
         <div
-          class="col-span-2 hidden md:flex flex-col items-center justify-center h-full"
+          class="col-span-2 hidden md:flex flex-col items-center justify-center h-full gap-4"
         >
-          <h2 class="text-center font-semibold">{{ response?.city }}</h2>
+          <h2 class="text-center font-semibold">
+            {{ response?.city }}
+          </h2>
+          <UButton
+            icon="i-heroicons-clock"
+            size="lg"
+            color="primary"
+            variant="solid"
+            label="Historique des Catastrophes Naturelles"
+            :trailing="false"
+            @click="isOpen = true"
+          />
         </div>
         <RisksBox
           class="col-span-1"
@@ -245,6 +257,38 @@ export default {
         />
         <RisksBox class="col-span-1" :level="miningRisks" :title="'Miniers'" />
       </div>
+      <UModal v-model="isOpen">
+        <UCard
+          :ui="{
+            ring: '',
+            divide: 'divide-y divide-gray-100 dark:divide-gray-800',
+          }"
+        >
+          <template #header>
+            <div class="flex items-center justify-between">
+              <h3
+                class="text-base font-semibold leading-6 text-gray-900 dark:text-white"
+              >
+                Historique
+              </h3>
+              <UButton
+                color="gray"
+                variant="ghost"
+                icon="i-heroicons-x-mark-20-solid"
+                class="-my-1"
+                @click="isOpen = false"
+              />
+            </div>
+          </template>
+          <UAlert
+            class="my-4"
+            v-for="item in response?.catnat"
+            :key="item.id"
+            :description="item.libelle_risque_jo"
+            :title="`${item.date_debut_evt} - ${item.date_fin_evt}`"
+          />
+        </UCard>
+      </UModal>
     </section>
   </section>
 </template>

@@ -1,3 +1,5 @@
+import e from "cors";
+
 export default defineEventHandler(async (event) => {
   type DangersData = {
     city?: string;
@@ -31,13 +33,29 @@ export default defineEventHandler(async (event) => {
       dangerData.azi = dataAZI.data[0];
 
       // CATNAT request
-      let urlCATNAT = `https://www.georisques.gouv.fr/api/v1/gaspar/catnat?code_insee=${dangerData.citycode}&page=1&page_size=10&rayon=1000`;
+      let urlCATNAT = `https://www.georisques.gouv.fr/api/v1/gaspar/catnat?code_insee=${dangerData.citycode}&page=1&page_size=100&rayon=1000`;
       const responseCATNAT = await fetch(urlCATNAT);
       if (!responseCATNAT.ok) {
         throw new Error(`Request failed with status ${responseCATNAT.status}`);
       }
       const dataCATNAT = await responseCATNAT.json();
-      dangerData.catnat = dataCATNAT.data;
+      dangerData.catnat = dataCATNAT.data.sort((a: any, b: any) => {
+        const parseDate = (dateString: string) => {
+          const [day, month, year] = dateString.split("/").map(Number);
+          return year * 10000 + month * 100 + day;
+        };
+
+        const dateA = parseDate(a.date_debut_evt);
+        const dateB = parseDate(b.date_debut_evt);
+
+        if (dateA > dateB) {
+          return -1;
+        } else if (dateA < dateB) {
+          return 1;
+        } else {
+          return a.libelle_risque_jo.localeCompare(b.libelle_risque_jo);
+        }
+      });
 
       // CAVITE request
       let urlCAVITE = `https://www.georisques.gouv.fr/api/v1/cavites?code_insee=${dangerData.citycode}&page=1&page_size=10`;
