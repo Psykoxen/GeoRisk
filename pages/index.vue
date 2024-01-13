@@ -24,7 +24,6 @@ export default {
   methods: {
     async requestDanger() {
       if (document.getElementById("adress").value === "") {
-        console.log("empty");
         toast.add({
           title: "Recherche Invalide",
           description: "Veuillez entrer une adresse valide",
@@ -107,9 +106,7 @@ export default {
                 break;
             }
           }
-          console.log(response);
         } catch (error) {
-          console.error("Error fetching data:", error);
           toast.add({
             title: "Erreur",
             description: "Oups, une erreur est survenue",
@@ -185,12 +182,17 @@ export default {
         v-if="this.$data.response !== null"
         class="flex flex-col items-center md:grid grid-cols-4 gap-4 w-full lg:w-2/3 md:3/4 p-10"
       >
-        <RisksBox
-          class="col-span-1"
-          :level="flooding"
-          :title="'Inondation'"
-          :history="response?.catnat"
+        <UButton
+          icon="i-heroicons-clock"
+          size="lg"
+          color="primary"
+          variant="solid"
+          label="Historique des Catastrophes Naturelles"
+          class="md:hidden"
+          :trailing="false"
+          @click="isOpen = true"
         />
+        <RisksBox class="col-span-1" :level="flooding" :title="'Inondation'" />
         <div
           class="col-span-2 hidden md:flex flex-col items-center justify-center h-full gap-4"
         >

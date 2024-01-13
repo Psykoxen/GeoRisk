@@ -87,7 +87,6 @@
 
     <div class="text-black flex flex-col items-center">
       <h3 class="text-center text-xl font-semibold">{{ title }}</h3>
-      <p>{{ image }}</p>
       <RisksLabel :level="level" />
     </div>
   </div>
@@ -127,10 +126,6 @@ export default {
     },
     title: {
       type: String,
-      required: true,
-    },
-    history: {
-      type: Array,
       required: true,
     },
   },
