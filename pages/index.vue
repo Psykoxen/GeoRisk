@@ -22,6 +22,11 @@ export default {
     };
   },
   methods: {
+    detectEnterKey(event) {
+      if (event.key === "Enter") {
+        this.requestDanger();
+      }
+    },
     async requestDanger() {
       if (document.getElementById("adress").value === "") {
         toast.add({
@@ -169,7 +174,7 @@ export default {
           type="text"
           id="adress"
           placeholder="Adresse, Commune, Lieu-dit"
-          @change="requestDanger()"
+          @keydown="detectEnterKey($event)"
         />
         <button
           class="bg-green-main-600 text-white p-4 mb-4 md:w-1/4 1/3 rounded-r-full outline-none focus:outline-none"
