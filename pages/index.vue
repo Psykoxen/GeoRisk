@@ -112,6 +112,7 @@ export default {
             }
           }
         } catch (error) {
+          this.setDefaultValue();
           toast.add({
             title: "Erreur",
             description: "Oups, une erreur est survenue",
