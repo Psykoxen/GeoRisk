@@ -28,11 +28,8 @@ All of risk's supported are presents in this [file](RISKS.md).
   - ✅ APIs convergence in own nuxt integrated API
 - ⏳ API Interpretation
   - ✅ API Risk display
-  - ⏳ API Risk history
-- ⏳ AI Assistant
-  - ⏳ Open AI Integration
-  - ⏳ Assistant design
-- ⏳ Responsive Design
+  - ✅ API Risk history
+- ✅ Responsive Design
 
 ## How to Contribute 🤝
 
