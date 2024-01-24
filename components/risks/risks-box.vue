@@ -1,90 +1,10 @@
 <template>
   <div class="bg-white risk w-full">
-    <img
-      v-if="title === 'Inondation'"
-      src="../../assets/svg/risksIcons/Flooding.svg"
-      alt="Flooding"
+    <img 
+    :src="'/risksIcons/' + title + '.svg'"
+      alt="Risk"
       class="icon"
     />
-    <img
-      v-if="title === 'Glissement de terrain'"
-      src="../../assets/svg/risksIcons/GroundMouvements.svg"
-      alt="GroundMovements"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Seisme'"
-      src="../../assets/svg/risksIcons/EarthQuakes.svg"
-      alt="Earthquakes"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Avalanche'"
-      src="../../assets/svg/risksIcons/Avalanche.svg"
-      alt="Avalanche"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Feu de Forêt'"
-      src="../../assets/svg/risksIcons/ForestFire.svg"
-      alt="ForestFire"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Volcaniques'"
-      src="../../assets/svg/risksIcons/Volcano.svg"
-      alt="VolcanicEruptions"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Météorologiques'"
-      src="../../assets/svg/risksIcons/Weather.svg"
-      alt="weatherTroubles"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Radon'"
-      src="../../assets/svg/risksIcons/Radon.svg"
-      alt="Radon"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Industriels'"
-      src="../../assets/svg/risksIcons/IndustrialRisk.svg"
-      alt="IndustrialRisks"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Transport Dangereux'"
-      src="../../assets/svg/risksIcons/DangerTransport.svg"
-      alt="DangerousMaterialsTransport"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Rupture de Barrages'"
-      src="../../assets/svg/risksIcons/DamBreaks.svg"
-      alt="DamBreaks"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Engins de guerre'"
-      src="../../assets/svg/risksIcons/WarEngine.svg"
-      alt="WarEngines"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Miniers'"
-      src="../../assets/svg/risksIcons/MiningRisk.svg"
-      alt="MiningRisks"
-      class="icon"
-    />
-    <img
-      v-if="title === 'Nucléaires'"
-      src="../../assets/svg/risksIcons/Nuclear.svg"
-      alt="NuclearRisks"
-      class="icon"
-    />
-
     <div class="text-black flex flex-col items-center">
       <h3 class="text-center text-xl font-semibold">{{ title }}</h3>
       <RisksLabel :level="level" />
